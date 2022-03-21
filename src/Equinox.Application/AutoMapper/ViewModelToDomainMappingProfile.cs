@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Equinox.Application.ViewModels;
-using Equinox.Domain.Commands.Agendamento;
-using Equinox.Domain.Commands.Atendimento;
-using Equinox.Domain.Commands.Cliente;
-using Equinox.Domain.Commands.Veterinario;
+using Equinox.Domain.Commands.Movimento;
+using Equinox.Domain.Commands.Usuario;
+using Equinox.Domain.Commands.UsuarioAtivo;
 using Equinox.Domain.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Equinox.Application.AutoMapper
@@ -13,28 +13,19 @@ namespace Equinox.Application.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-          
-            #region Cliente
-            CreateMap<ClienteViewModel, Cliente>();
-            CreateMap<ClienteContatoViewModel, ClienteContato>()
-                .ConstructUsing(c => new ClienteContato(c.id_contato,c.ds_contato, c.id_tipo_contato, c.id_cliente, null));
-            CreateMap<ClienteAnimalViewModel, ClienteAnimal>();
-            CreateMap<ClienteViewModel, RegisterNewClienteCommand>();
-            CreateMap<ClienteViewModel, UpdateClienteCommand>();
+
+            #region Movimento
+            CreateMap<MovimentoViewModel, RegisterNewMovimentoCommand>()
+                .ConstructUsing(c => new RegisterNewMovimentoCommand(0, c.usuarioId, c.evento, 
+                                                                     c.target.bank, c.target.branch, c.target.account, 
+                                                                     c.origin.bank, c.origin.branch, c.origin.cpf,c.amount, null, null));
             #endregion
 
-            #region Veterinario
-            CreateMap<VeterinarioViewModel, Veterinario>();
-            CreateMap<VeterinarioViewModel, RegisterNewVeterinarioCommand>();
-            CreateMap<VeterinarioViewModel, UpdateVeterinarioCommand>();
-            #endregion
-
-            #region Agendamento
-            CreateMap<AgendamentoViewModel, RegisterNewAgendamentoCommand>();
-            #endregion
-
-            #region Atendimento
-            CreateMap<AtendimentoViewModel, RegisterNewAtendimentoCommand>();
+            #region Usuario
+            CreateMap<UsuarioViewModel, Usuario>();
+            CreateMap<UsuarioViewModel, RegisterNewUsuarioCommand>();
+            CreateMap<UsuarioAtivoViewModel, RegisterNewUsuarioAtivoCommand>();
+            CreateMap<AtivoViewModel, Ativo>();
             #endregion
 
         }

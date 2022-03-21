@@ -1,8 +1,9 @@
 ﻿using Equinox.Application.Interfaces;
 using Equinox.Application.Services;
 using Equinox.Domain.CommandHandlers;
-using Equinox.Domain.Commands.Cliente;
-using Equinox.Domain.Commands.Veterinario;
+using Equinox.Domain.Commands.Movimento;
+using Equinox.Domain.Commands.Usuario;
+using Equinox.Domain.Commands.UsuarioAtivo;
 using Equinox.Domain.Core.Bus;
 using Equinox.Domain.Core.Events;
 using Equinox.Domain.Core.Notifications;
@@ -15,9 +16,6 @@ using Equinox.Infra.Data.Repository.EventSourcing;
 using Equinox.Infra.Data.UoW;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System.ComponentModel.DataAnnotations;
-using Equinox.Domain.Commands.Agendamento;
-using Equinox.Domain.Commands.Atendimento;
 
 namespace Equinox.Infra.CrossCutting.IoC
 {
@@ -32,27 +30,21 @@ namespace Equinox.Infra.CrossCutting.IoC
             //services.AddSingleton<IAuthorizationHandler,ClaimsRequirementHandler>();
 
             // Application
-            services.AddScoped<IClienteAppService, ClienteAppService>();
-            services.AddScoped<IVeterinarioAppService, VeterinarioAppService>();
-            services.AddScoped<IAgendamentoAppService, AgendamentoAppService>();
-            services.AddScoped<IAtendimentoAppService, AtendimentoAppService>();
+            services.AddScoped<IMovimentoAppService, MovimentoAppService>();
+            services.AddScoped<IUsuarioAppService, UsuarioAppService>();
+            services.AddScoped<IUsuarioAtivoAppService, UsuarioAtivoAppService>();
 
             // Domain - Events
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
            
             // Domain - Commands
-            services.AddScoped<IRequestHandler<RegisterNewClienteCommand, bool>, ClienteCommandHandler>();
-            services.AddScoped<IRequestHandler<UpdateClienteCommand, bool>, ClienteCommandHandler>();
-            services.AddScoped<IRequestHandler<RegisterNewVeterinarioCommand, bool>, VeterinarioCommandHandler>();
-            services.AddScoped<IRequestHandler<UpdateVeterinarioCommand, bool>, VeterinarioCommandHandler>();
-            services.AddScoped<IRequestHandler<RegisterNewAgendamentoCommand, bool>, AgendamentoCommandHandler>();
-            services.AddScoped<IRequestHandler<RegisterNewAtendimentoCommand, bool>, AtendimentoCommandHandler>();
-
+            services.AddScoped<IRequestHandler<RegisterNewMovimentoCommand, bool>, MovimentoCommandHandler>();
+            services.AddScoped<IRequestHandler<RegisterNewUsuarioCommand, bool>, UsuarioCommandHandler>();
+            services.AddScoped<IRequestHandler<RegisterNewUsuarioAtivoCommand, bool>, UsuarioAtivoCommandHandler>();
             // Infra - Data
-            services.AddScoped<IClienteRepository, ClienteRepository>();
-            services.AddScoped<IVeterinarioRepository, VeterinarioRepository>();
-            services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
-            services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
+            services.AddScoped<IMovimentoRepository, MovimentoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IUsuarioAtivoRepository, UsuarioAtivoRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<EquinoxContext>();
 

@@ -10,15 +10,9 @@ namespace Equinox.Application.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<Cliente, ClienteViewModel>();
-            CreateMap<ClienteAnimalDto, ClienteAnimalViewModel>();
-            CreateMap<ClienteAnimal, ClienteAnimalViewModel>();
-            CreateMap<ClienteContatoDto, ClienteContatoViewModel>();
-            CreateMap<HorariosDto, HorariosViewModel>();
-            CreateMap<Veterinario, VeterinarioViewModel>();
-            CreateMap<VeterinarioGrade, HorariosViewModel>();
-            CreateMap<AgendamentoGridDto, AgendamentoGridViewModel>();
-            CreateMap<AtendimentoGridDto, AtendimentoGridViewModel>();
+            CreateMap<Usuario, UsuarioViewModel>();
+            CreateMap<UsuarioPosicaoDto, UsuarioPosicaoViewModel>();
+            CreateMap<PosicaoDto, PosicaoViewModel>();
         }
     }
 }

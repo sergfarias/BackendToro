@@ -12,12 +12,17 @@ namespace Equinox.Services.Api.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            
+            //services.AddDbContext<EquinoxContext>(options =>
+            //    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+            //services.AddDbContext<EventStoreSqlContext>(options =>
+            //    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<EquinoxContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<EventStoreSqlContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         }
     }

@@ -24,7 +24,9 @@ namespace Equinox.Infra.Data.Context
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            optionsBuilder.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+
+            // optionsBuilder.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             //optionsBuilder.UseLazyLoadingProxies();
         }
 
