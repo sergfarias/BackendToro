@@ -11,7 +11,8 @@ using System;
 namespace Equinox.Domain.CommandHandlers
 {
     public class UsuarioCommandHandler: CommandHandler,
-        IRequestHandler<RegisterNewUsuarioCommand, bool>
+        IRequestHandler<RegisterNewUsuarioCommand, bool>,
+        IRequestHandler<UpdateUsuarioCommand, bool>
     {
 
         private readonly IUsuarioRepository _usuarioRepository;
@@ -40,7 +41,22 @@ namespace Equinox.Domain.CommandHandlers
               Commit();
               return Task.FromResult(true);
          }
-      
+
+        public Task<bool> Handle(UpdateUsuarioCommand message, CancellationToken cancellationToken)
+        {
+            if (!message.IsValid())
+            {
+                NotifyValidationErrors(message);
+                return Task.FromResult(false);
+            }
+
+            var usuario = _usuarioRepository.GetById(message.Id);
+            usuario.AlterarSaldoUsuario(message.Saldo);
+            _usuarioRepository.Update(usuario);
+            Commit();
+            return Task.FromResult(true);
+        }
+
         public void Dispose()
         {
                 _usuarioRepository.Dispose();

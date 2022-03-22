@@ -6,8 +6,7 @@ namespace Equinox.Domain.Models
 {
     public class Usuario : Entity<Usuario> 
     {
-
-        public long CodConta { get; private set; }
+        public string CodConta { get; private set; }
         public string Nome { get; private set; }
         public string Cpf { get; private set; }
         public string Email { get; private set; }
@@ -17,7 +16,7 @@ namespace Equinox.Domain.Models
         public virtual ICollection<UsuarioAtivo> UsuarioAtivo { get; private set; }
         public virtual ICollection<Movimento> Movimento { get; private set; }
 
-        public Usuario(int id, long codConta, string nome, string cpf, string email, 
+        public Usuario(int id, string codConta, string nome, string cpf, string email, 
                        string senha, decimal saldo, DateTime? dataCadastro,
                        ICollection<UsuarioAtivo> usuarioAtivo)
         {
@@ -30,6 +29,12 @@ namespace Equinox.Domain.Models
             Saldo = saldo;
             DataCadastro = dataCadastro;
             UsuarioAtivo = usuarioAtivo;
+        }
+
+        public Usuario AlterarSaldoUsuario(decimal saldo)
+        {
+            Saldo = saldo;
+            return this;
         }
 
         // Empty constructor for EF

@@ -5,8 +5,6 @@ using Equinox.Domain.Core.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Equinox.Services.Api.Controllers
 {
@@ -92,23 +90,38 @@ namespace Equinox.Services.Api.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("cadastro/movimento")]
-        public IActionResult Post([FromBody] MovimentoViewModel movimento)
+        public IActionResult Post([FromBody] DepositoViewModel deposito)
         {
-            //var usuarioExiste = _usuarioAppService.GetByUsuario(usuario.cpf);
-            //if (usuarioExiste != null)
-            //{
-            //    NotifyError("Usuário", "Rollback executado, pois o CPF já cadastrado.");
-            //    return Response(this.Notifications);
-            //}
 
-            //if (!_usuarioAppService.ValidaCPF(usuario.cpf))
-            //{
-            //    NotifyError("Usuário", "Rollback executado, pois o CPF é inválido.");
-            //    return Response(this.Notifications);
-            //}
+            MovimentoViewModel movimento = new();
+            var usuario = _usuarioAppService.GetByUsuario(deposito.usuarioId);
+            if (usuario == null)
+            {
+                NotifyError("Usuário", "Rollback executado, pois o usuário não foi encontrado.");
+                return Response(this.Notifications);
+            }
+
+            movimento.amount = System.Convert.ToDecimal(deposito.valor);
+            movimento.evento = "TRANSFER";
+            movimento.usuarioId = deposito.usuarioId;
+            movimento.origin = new MovimentoOriginViewModel
+            {
+                bank = deposito.bancoOrigem,
+                branch = deposito.agenciaOrigem,
+                cpf = usuario.cpf
+            };
+            movimento.target = new MovimentoTargetViewModel
+            {
+                bank = "352",
+                branch = "0001",
+                account = usuario.codConta.ToString()
+            };
 
             _movimentoAppService.Register(movimento);
+            usuario.saldo += movimento.amount; 
+            _usuarioAppService.Update(usuario);
             return Response(this.Notifications);
         }
 

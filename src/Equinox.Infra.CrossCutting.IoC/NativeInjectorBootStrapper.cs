@@ -40,6 +40,7 @@ namespace Equinox.Infra.CrossCutting.IoC
             // Domain - Commands
             services.AddScoped<IRequestHandler<RegisterNewMovimentoCommand, bool>, MovimentoCommandHandler>();
             services.AddScoped<IRequestHandler<RegisterNewUsuarioCommand, bool>, UsuarioCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateUsuarioCommand, bool>, UsuarioCommandHandler>();
             services.AddScoped<IRequestHandler<RegisterNewUsuarioAtivoCommand, bool>, UsuarioAtivoCommandHandler>();
             // Infra - Data
             services.AddScoped<IMovimentoRepository, MovimentoRepository>();

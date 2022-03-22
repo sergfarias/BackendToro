@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Equinox.Domain.Commands.Usuario
 {
-    public class RegisterNewUsuarioCommand : UsuarioCommand
+    public class UpdateUsuarioCommand : UsuarioCommand
     {
-        public RegisterNewUsuarioCommand(
+        public UpdateUsuarioCommand(
         int id,
         string codConta,
         string cpf,

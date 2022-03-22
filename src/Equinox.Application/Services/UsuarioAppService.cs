@@ -32,6 +32,11 @@ namespace Equinox.Application.Services
             return _mapper.Map<UsuarioViewModel>(_usuarioRepository.GetByUsuario(cpf));
         }
 
+        public UsuarioViewModel GetByUsuario(int usuarioId)
+        {
+            return _mapper.Map<UsuarioViewModel>(_usuarioRepository.GetById(usuarioId));
+        }
+
         public UsuarioPosicaoViewModel GetByUsuarioPosicao(string cpf)
         {
             return _mapper.Map<UsuarioPosicaoViewModel>(_usuarioRepository.GetByUsuarioPosicao(cpf));
@@ -41,6 +46,12 @@ namespace Equinox.Application.Services
         {
             var registerCommand = _mapper.Map<RegisterNewUsuarioCommand>(usuarioViewModel);
             _mediator.SendCommand(registerCommand);
+        }
+
+        public void Update(UsuarioViewModel usuarioViewModel)
+        {
+            var updateCommand = _mapper.Map<UpdateUsuarioCommand>(usuarioViewModel);
+            _mediator.SendCommand(updateCommand);
         }
 
         public bool ValidaCPF(string vrCPF)

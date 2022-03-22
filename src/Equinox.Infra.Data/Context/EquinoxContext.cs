@@ -59,6 +59,29 @@ namespace Equinox.Infra.Data.Context
                 new Ativo(10, "ENEV3", "ENEV3", Convert.ToDecimal("13,71"), DateTime.Now, null)
             );
 
+            modelBuilder.Entity<Usuario>().HasData(
+                new Usuario(2, "000002", "Teste2", "12345678901","email@gmail.com","1234", 100, DateTime.Now, null),
+                new Usuario(3, "000003", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(4, "000004", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(5, "000005", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(6, "000006", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(7, "000007", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(8, "000008", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(9, "000009", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null)
+            );
+
+            modelBuilder.Entity<UsuarioAtivo>().HasData(
+              new UsuarioAtivo(3, 1, 2, 3, null, null, DateTime.Now),
+              new UsuarioAtivo(4, 3, 2, 2, null, null, DateTime.Now),
+              new UsuarioAtivo(5, 1, 3, 3, null, null, DateTime.Now),
+              new UsuarioAtivo(6, 3, 3, 2, null, null, DateTime.Now),
+              new UsuarioAtivo(7, 5, 3, 3, null, null, DateTime.Now),
+              new UsuarioAtivo(8, 6, 3, 2, null, null, DateTime.Now),
+              new UsuarioAtivo(9, 7, 5, 3, null, null, DateTime.Now),
+              new UsuarioAtivo(10, 8, 5, 2, null, null, DateTime.Now)
+          );
+
+
         }
 
     }

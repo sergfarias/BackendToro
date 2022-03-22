@@ -24,6 +24,7 @@ namespace Equinox.Application.AutoMapper
             #region Usuario
             CreateMap<UsuarioViewModel, Usuario>();
             CreateMap<UsuarioViewModel, RegisterNewUsuarioCommand>();
+            CreateMap<UsuarioViewModel, UpdateUsuarioCommand>();
             CreateMap<UsuarioAtivoViewModel, RegisterNewUsuarioAtivoCommand>();
             CreateMap<AtivoViewModel, Ativo>();
             #endregion
