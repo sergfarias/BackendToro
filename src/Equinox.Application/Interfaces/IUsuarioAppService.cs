@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Equinox.Application.ViewModels;
 namespace Equinox.Application.Interfaces
 {
@@ -11,5 +12,6 @@ namespace Equinox.Application.Interfaces
         UsuarioViewModel GetByUsuario(string cpf);
         UsuarioViewModel GetByUsuario(int usuarioId);
         UsuarioPosicaoViewModel GetByUsuarioPosicao(string cpf);
+        List<TrendsViewModel> GetByTrends();
     }
 }

@@ -3,6 +3,7 @@ using Equinox.Domain.Interfaces;
 using Equinox.Domain.Models;
 using Equinox.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -75,6 +76,38 @@ namespace Equinox.Infra.Data.Repository
 
             usuarioPosicao.consolidated = consolidado + usuario.Saldo;
             return usuarioPosicao;
+        }
+
+
+        public IEnumerable<AtivoDto> GetByAtivo()
+        {
+            var dataFinal = DateTime.Now;
+            var dataInicial =  dataFinal.AddDays(-6); 
+
+            dataInicial = Convert.ToDateTime(dataInicial.ToString("yyyy-MM-dd"));
+            dataFinal = Convert.ToDateTime(dataFinal.ToString("yyyy-MM-dd"));
+
+            var query = (from ativo in Db.Ativo
+                         from usuarioAtivo in Db.UsuarioAtivo.Where(x => x.AtivoId == ativo.Id)
+                         from usuario in Db.Usuario.Where(x => x.Id == usuarioAtivo.UsuarioId)
+                         where (usuarioAtivo.DataCadastro.Value >= dataInicial
+                                && usuarioAtivo.DataCadastro.Value <= dataFinal)
+                         select new AtivoDto
+                         {
+                             symbol = ativo.Sigla,
+                             currentPrice = ativo.Valor
+                         });
+
+            var siglaMaisVendidos = query.GroupBy(userInfo => userInfo.symbol)
+                                    .OrderBy(group => group.Key)
+                                    .Select(group => Tuple.Create(group.Key, group.Count()))
+                                    .ToList()
+                                    .OrderByDescending(c => c.Item2).Take(4)
+                                    .Select(p => new { p.Item1 }).ToList();
+           
+            var retorno = query.Distinct().ToList().Where(c => siglaMaisVendidos.Any(p => c.symbol.Contains(p.Item1)));
+
+            return retorno.Take(4).ToList(); 
         }
 
     }

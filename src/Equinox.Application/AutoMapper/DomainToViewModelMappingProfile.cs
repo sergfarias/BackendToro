@@ -13,6 +13,7 @@ namespace Equinox.Application.AutoMapper
             CreateMap<Usuario, UsuarioViewModel>();
             CreateMap<UsuarioPosicaoDto, UsuarioPosicaoViewModel>();
             CreateMap<PosicaoDto, PosicaoViewModel>();
+            CreateMap<AtivoDto, TrendsViewModel>();
         }
     }
 }

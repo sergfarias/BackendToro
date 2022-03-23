@@ -5,6 +5,7 @@ using Equinox.Domain.Core.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Equinox.Services.Api.Controllers
 {
@@ -42,6 +43,15 @@ namespace Equinox.Services.Api.Controllers
         public UsuarioPosicaoViewModel GetByUsuarioPosicao(string cpf)
         {
             return _usuarioAppService.GetByUsuarioPosicao(cpf);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("pesquisa/trends")]
+        public IEnumerable<TrendsViewModel> GetByTrends()
+        {
+            var x = _usuarioAppService.GetByTrends();
+            return x;
         }
 
         [HttpPost]

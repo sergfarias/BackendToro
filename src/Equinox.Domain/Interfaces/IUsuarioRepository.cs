@@ -9,5 +9,6 @@ namespace Equinox.Domain.Interfaces
         Usuario GetByUsuario(string cpf, string senha);
         Usuario GetByUsuario(string cpf);
         UsuarioPosicaoDto GetByUsuarioPosicao(string cpf);
+        IEnumerable<AtivoDto> GetByAtivo();
     }
 }

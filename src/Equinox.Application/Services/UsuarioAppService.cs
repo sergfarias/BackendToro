@@ -5,6 +5,8 @@ using Equinox.Domain.Interfaces;
 using Equinox.Application.Interfaces;
 using Equinox.Application.ViewModels;
 using Equinox.Domain.Commands.Usuario;
+using System.Collections.Generic;
+
 namespace Equinox.Application.Services
 {
     public class UsuarioAppService : IUsuarioAppService
@@ -40,6 +42,11 @@ namespace Equinox.Application.Services
         public UsuarioPosicaoViewModel GetByUsuarioPosicao(string cpf)
         {
             return _mapper.Map<UsuarioPosicaoViewModel>(_usuarioRepository.GetByUsuarioPosicao(cpf));
+        }
+
+        public List<TrendsViewModel> GetByTrends()
+        {
+            return _mapper.Map<List<TrendsViewModel>>(_usuarioRepository.GetByAtivo());
         }
 
         public void Register(UsuarioViewModel usuarioViewModel)
