@@ -60,25 +60,34 @@ namespace Equinox.Infra.Data.Context
             );
 
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario(2, "000002", "Teste2", "12345678901","email@gmail.com","1234", 100, DateTime.Now, null),
-                new Usuario(3, "000003", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
-                new Usuario(4, "000004", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
-                new Usuario(5, "000005", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
-                new Usuario(6, "000006", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
-                new Usuario(7, "000007", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
-                new Usuario(8, "000008", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null),
-                new Usuario(9, "000009", "Teste2", "12345678901", "email@gmail.com", "1234", 100, DateTime.Now, null)
+                new Usuario(2, "000002", "Teste2", "12345678902","email@gmail.com","1234", 100, DateTime.Now, null),
+                new Usuario(3, "000003", "Teste3", "12345678903", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(4, "000004", "Teste4", "12345678904", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(5, "000005", "Teste5", "12345678905", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(6, "000006", "Teste6", "12345678906", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(7, "000007", "Teste7", "12345678907", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(8, "000008", "Teste8", "12345678908", "email@gmail.com", "1234", 100, DateTime.Now, null),
+                new Usuario(9, "000009", "Teste9", "12345678909", "email@gmail.com", "1234", 100, DateTime.Now, null)
             );
 
             modelBuilder.Entity<UsuarioAtivo>().HasData(
-              new UsuarioAtivo(3, 1, 2, 3, null, null, DateTime.Now),
-              new UsuarioAtivo(4, 3, 2, 2, null, null, DateTime.Now),
-              new UsuarioAtivo(5, 1, 3, 3, null, null, DateTime.Now),
-              new UsuarioAtivo(6, 3, 3, 2, null, null, DateTime.Now),
-              new UsuarioAtivo(7, 5, 3, 3, null, null, DateTime.Now),
-              new UsuarioAtivo(8, 6, 3, 2, null, null, DateTime.Now),
-              new UsuarioAtivo(9, 7, 5, 3, null, null, DateTime.Now),
-              new UsuarioAtivo(10, 8, 5, 2, null, null, DateTime.Now)
+              new UsuarioAtivo(3, 1, 2, 3, null, null, System.Convert.ToDateTime("19/03/2022")),
+              new UsuarioAtivo(4, 3, 2, 2, null, null, System.Convert.ToDateTime("20/03/2022")),
+              new UsuarioAtivo(5, 1, 3, 3, null, null, System.Convert.ToDateTime("23/03/2022")),
+              new UsuarioAtivo(6, 3, 3, 2, null, null, System.Convert.ToDateTime("23/03/2022")),
+              new UsuarioAtivo(7, 5, 4, 3, null, null, System.Convert.ToDateTime("23/03/2022")),
+              new UsuarioAtivo(8, 6, 4, 2, null, null, System.Convert.ToDateTime("24/03/2022")),
+              new UsuarioAtivo(9, 7, 5, 3, null, null, System.Convert.ToDateTime("24/03/2022")),
+              new UsuarioAtivo(10, 3, 5, 2, null, null, System.Convert.ToDateTime("22/03/2022")),
+              new UsuarioAtivo(11, 5, 6, 3, null, null, System.Convert.ToDateTime("22/03/2022")),
+              new UsuarioAtivo(12, 6, 6, 2, null, null, System.Convert.ToDateTime("23/03/2022")),
+              new UsuarioAtivo(13, 7, 7, 3, null, null, System.Convert.ToDateTime("24/03/2022")),
+              new UsuarioAtivo(14, 8, 7, 2, null, null, System.Convert.ToDateTime("24/03/2022")),
+              new UsuarioAtivo(15, 7, 8, 3, null, null, System.Convert.ToDateTime("24/03/2022")),
+              new UsuarioAtivo(16, 8, 8, 2, null, null, System.Convert.ToDateTime("22/03/2022")),
+              new UsuarioAtivo(17, 8, 9, 2, null, null, DateTime.Now),
+              new UsuarioAtivo(18, 7, 9, 3, null, null, DateTime.Now),
+              new UsuarioAtivo(19, 8, 9, 2, null, null, DateTime.Now)
           );
 
 
