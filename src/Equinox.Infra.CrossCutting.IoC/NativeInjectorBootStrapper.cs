@@ -46,6 +46,7 @@ namespace Equinox.Infra.CrossCutting.IoC
             services.AddScoped<IMovimentoRepository, MovimentoRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IUsuarioAtivoRepository, UsuarioAtivoRepository>();
+            services.AddScoped<IAtivoRepository, AtivoRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<EquinoxContext>();
 

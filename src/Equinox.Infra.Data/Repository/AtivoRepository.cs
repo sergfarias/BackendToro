@@ -8,21 +8,24 @@ using System.Linq;
 
 namespace Equinox.Infra.Data.Repository
 {
-    public class UsuarioAtivoRepository : Repository<UsuarioAtivo>, IUsuarioAtivoRepository
+    public class AtivoRepository : Repository<Ativo>, IAtivoRepository
     {
         protected new readonly EquinoxContext Db;
 
-        public UsuarioAtivoRepository(EquinoxContext context):base(context)
+        public AtivoRepository(EquinoxContext context):base(context)
         {
             Db = context;
         }
 
-        public UsuarioAtivo GetByUsuarioAtivo(int id)
+        public Ativo GetByAtivo(int id)
         {
             return DbSet.Find(id);
         }
 
-        
+        public Ativo GetByAtivo(string sigla)
+        {
+            return DbSet.Where(c => c.Sigla == sigla).FirstOrDefault();
+        }
 
     }
 }

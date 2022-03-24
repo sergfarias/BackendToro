@@ -78,23 +78,20 @@ namespace Equinox.Services.Api.Controllers
 
         [HttpPost]
         [Route("cadastro/usuarioativo")]
-        public IActionResult Post([FromBody] UsuarioAtivoViewModel usuarioAtivo)
+        public IActionResult Post([FromBody] ComprarAtivoViewModel comprarAtivo)
         {
-            //var usuarioExiste = _usuarioAppService.GetByUsuario(usuario.cpf);
-            //if (usuarioExiste != null)
-            //{
-            //    NotifyError("Usuário", "Rollback executado, pois o CPF já cadastrado.");
-            //    return Response(this.Notifications);
-            //}
-
-            //if (!_usuarioAppService.ValidaCPF(usuario.cpf))
-            //{
-            //    NotifyError("Usuário", "Rollback executado, pois o CPF é inválido.");
-            //    return Response(this.Notifications);
-            //}
-
-            //usuarioAtivo.dataCadastro = System.DateTime.Now;
+            UsuarioAtivoViewModel usuarioAtivo = new UsuarioAtivoViewModel();
+            usuarioAtivo.Quantidade = comprarAtivo.Quantidade;
+            usuarioAtivo.UsuarioId = comprarAtivo.UsuarioId;
+            string sigla = comprarAtivo.Sigla;
+            var ativo = _usuarioAtivoAppService.GetByAtivo(sigla);
+            usuarioAtivo.AtivoId = ativo.id;
             _usuarioAtivoAppService.Register(usuarioAtivo);
+
+            var usuario = _usuarioAppService.GetByUsuario(usuarioAtivo.UsuarioId);
+            usuario.saldo -= (System.Convert.ToDecimal(ativo.Valor) * comprarAtivo.Quantidade);
+            _usuarioAppService.Update(usuario);
+
             return Response(this.Notifications);
         }
 
@@ -104,7 +101,6 @@ namespace Equinox.Services.Api.Controllers
         [Route("cadastro/movimento")]
         public IActionResult Post([FromBody] DepositoViewModel deposito)
         {
-
             MovimentoViewModel movimento = new();
             var usuario = _usuarioAppService.GetByUsuario(deposito.usuarioId);
             if (usuario == null)
